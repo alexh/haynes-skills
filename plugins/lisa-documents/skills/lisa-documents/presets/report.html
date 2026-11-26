@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="preset" content="report">
+<title>Replacing the Furnace</title>
+<!--FONTS-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&family=Raleway:wght@300;400;600;800&display=swap">
+<!--/FONTS-->
+<style>
+/* REPORT preset. Letter-size write-up: Raleway headings, Lato body,
+   Monaspace Krypton for labels, links and numbers. One accent color. */
+:root {
+  --accent: #c0182f;        /* Lisa red */
+  --accent-deep: #7d0f20;
+  --accent-wash: #fdecee;
+  --ink: #1f1a1b;
+  --ink-soft: #5f5759;
+  --rule: #e8d9db;
+  --tint: #f5f0f1;
+  --med: #9a5b00;
+  --med-wash: #fdf3e2;
+  --good: #1f7a4a;
+  --good-wash: #e8f5ee;
+  --display: "Raleway", "Helvetica Neue", Arial, sans-serif;
+  --body: "Lato", "Helvetica Neue", Arial, sans-serif;
+  --mono: "Monaspace Krypton", Menlo, Consolas, monospace;
+}
+@page { size: Letter; margin: 0.6in 0.7in 0.7in; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { margin: 0; font-family: var(--body); color: var(--ink); font-size: 11.5pt; line-height: 1.55; background: #fff; }
+@media screen { body { max-width: 8.5in; margin: 0 auto; padding: 0.6in 0.7in 0.7in; } }
+@media screen and (max-width: 640px) { body { padding: 24px 16px; font-size: 11pt; } }
+a { color: var(--accent); text-underline-offset: .18em; text-decoration-thickness: 1px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+::selection { background: var(--accent-wash); color: var(--accent-deep); }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; }
+p { margin: 0; }
+
+/* Banner: one link or fact the reader needs first */
+.banner {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 18px;
+  background: var(--accent); color: #fff; padding: 14px 20px; border-radius: 4px;
+}
+.banner .label { font-family: var(--mono); font-weight: 800; font-size: 8.5pt; letter-spacing: .18em; text-transform: uppercase; opacity: .85; }
+.banner .big { font-family: var(--mono); font-size: 13pt; color: #fff; text-decoration: none; letter-spacing: -.01em; overflow-wrap: anywhere; }
+.banner .note { font-size: 9pt; opacity: .9; text-align: right; max-width: 2.2in; line-height: 1.35; }
+
+header.title { margin: 28px 0 22px; padding-bottom: 18px; border-bottom: 1px solid var(--rule); }
+.eyebrow { font-family: var(--mono); font-size: 8pt; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); }
+h1 { font-weight: 300; font-size: 28pt; line-height: 1.12; margin-top: 8px; letter-spacing: -.01em; }
+h1 b { font-weight: 800; color: var(--accent); }
+.byline { margin-top: 10px; color: var(--ink-soft); font-size: 10pt; }
+
+h2 { font-weight: 800; font-size: 15pt; color: var(--accent-deep); margin: 26px 0 10px; letter-spacing: -.005em; break-after: avoid; }
+h2 .n { font-family: var(--mono); font-weight: 400; font-size: 9pt; color: var(--accent); letter-spacing: .1em; display: block; margin-bottom: 2px; }
+h3 { font-weight: 800; font-size: 11.5pt; margin-bottom: 3px; break-after: avoid; }
+.intro { font-size: 10.5pt; color: var(--ink-soft); margin-bottom: 4px; }
+.lead { font-size: 12.5pt; line-height: 1.55; margin-bottom: 14px; }
+
+/* Summary tiles: 2 or 4, never 3 or 5 */
+.summary { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 4px; }
+.summary > div { background: var(--accent-wash); border-radius: 4px; padding: 12px 14px; break-inside: avoid; }
+.summary .k { font-family: var(--mono); font-size: 7.5pt; letter-spacing: .14em; text-transform: uppercase; color: var(--accent-deep); }
+.summary .v { font-family: var(--display); font-weight: 800; font-size: 13pt; margin-top: 3px; }
+.summary .s { font-size: 9.5pt; color: var(--ink-soft); margin-top: 2px; }
+
+/* Findings with a severity tag */
+.finding { display: grid; grid-template-columns: 70px 1fr; gap: 14px; padding: 12px 0; border-top: 1px solid var(--rule); break-inside: avoid; }
+.finding:first-of-type { border-top: 0; }
+.sev { font-family: var(--mono); font-weight: 800; font-size: 7.5pt; letter-spacing: .12em; text-transform: uppercase; text-align: center; padding: 5px 0; border-radius: 3px; height: fit-content; margin-top: 2px; }
+.sev.high { color: #fff; background: var(--accent); }
+.sev.med { color: var(--med); background: var(--med-wash); }
+.sev.low { color: var(--ink-soft); background: var(--tint); }
+.sev.good { color: var(--good); background: var(--good-wash); }
+.finding p { font-size: 10.5pt; }
+.finding .fix { margin-top: 4px; color: var(--ink-soft); font-size: 10pt; }
+.finding .fix b { color: var(--good); }
+code { font-family: var(--mono); font-size: 9pt; background: var(--tint); padding: 1px 4px; border-radius: 2px; }
+
+/* Points grid: short benefits or facts, even count */
+.points { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 22px; margin-top: 6px; }
+.points > div { break-inside: avoid; padding-left: 12px; border-left: 3px solid var(--accent); }
+.points p { font-size: 10pt; color: var(--ink-soft); }
+.callout { margin-top: 16px; background: var(--good-wash); border-radius: 4px; padding: 12px 16px; font-size: 10.5pt; break-inside: avoid; }
+.callout b { color: var(--good); }
+
+/* Decisions: two options, the recommended one marked */
+.choice { padding: 12px 0; border-top: 1px solid var(--rule); break-inside: avoid; }
+.choice .opts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; }
+.opt { border: 1px solid var(--rule); border-radius: 4px; padding: 9px 12px; font-size: 9.8pt; color: var(--ink-soft); }
+.opt.pick { border-color: var(--accent); background: var(--accent-wash); color: var(--ink); }
+.opt .t { font-weight: 900; color: var(--ink); display: block; margin-bottom: 2px; }
+.opt.pick .t::after { content: "Recommended"; font-family: var(--mono); font-weight: 800; font-size: 6.8pt; letter-spacing: .12em; text-transform: uppercase; color: #fff; background: var(--accent); padding: 2px 6px; border-radius: 2px; margin-left: 8px; vertical-align: 1px; }
+.opt.pick .t[data-badge]::after { content: attr(data-badge); }
+
+ol.steps { margin: 6px 0 0; padding-left: 20px; }
+ol.steps li { margin: 4px 0; font-size: 10.5pt; }
+ol.steps li::marker { font-family: var(--mono); color: var(--accent); font-size: 9pt; }
+
+table { width: 100%; border-collapse: collapse; font-size: 10pt; margin-top: 6px; font-variant-numeric: tabular-nums; break-inside: avoid; }
+th { text-align: left; font-family: var(--mono); font-size: 7.5pt; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); font-weight: 400; padding: 6px 8px; border-bottom: 1.5px solid var(--ink); }
+td { padding: 7px 8px; border-bottom: 1px solid var(--rule); }
+th.num, td.num { text-align: right; white-space: nowrap; }
+tr.total td { font-weight: 900; border-bottom: 0; }
+.table-wrap { overflow-x: auto; }
+
+.page-break { break-before: page; }
+footer { margin-top: 24px; padding-top: 10px; border-top: 1px solid var(--rule); font-size: 8.5pt; color: var(--ink-soft); display: flex; flex-wrap: wrap; gap: 6px 16px; justify-content: space-between; }
+
+@media screen and (max-width: 640px) {
+  .summary, .points, .choice .opts { grid-template-columns: 1fr; }
+  .finding { grid-template-columns: 1fr; gap: 6px; }
+  .sev { width: 70px; }
+  .banner .note { text-align: left; max-width: none; }
+  h1 { font-size: 22pt; }
+}
+</style>
+</head>
+<body>
+
+<div class="banner">
+  <div>
+    <div class="label">Decide by</div>
+    <div class="big">Friday, December 4</div>
+  </div>
+  <div class="note">The installer can start the following Tuesday if we sign by then.</div>
+</div>
+
+<header class="title">
+  <div class="eyebrow">Haynes household · Home repairs</div>
+  <h1>Replacing the furnace <b>before the cold</b></h1>
+  <p class="byline">Prepared by Lisa Haynes · November 26, 2026</p>
+</header>
+
+<p class="lead">Our furnace is twenty-two years old and the technician who serviced it last week said it won't make it through another winter safely. This lays out what he found, why a new one is worth it, the two choices we have to make, and what it all costs.</p>
+
+<div class="summary">
+  <div><div class="k">Current furnace</div><div class="v">Unsafe to run</div><div class="s">Cracked heat exchanger, found November 19.</div></div>
+  <div><div class="k">Repair estimate</div><div class="v">About $2,900</div><div class="s">And the rest of the unit is near the end of its life.</div></div>
+  <div><div class="k">Recommended</div><div class="v">New high-efficiency furnace</div><div class="s">About $6,400 installed, less a $600 utility rebate.</div></div>
+  <div><div class="k">Heating bill</div><div class="v">About 25% lower</div><div class="s">Estimate from the utility's calculator.</div></div>
+</div>
+
+<h2><span class="n">PART 1</span>What the technician found</h2>
+<p class="intro">Inspection by the heating company on November 19. The written report is in the kitchen drawer.</p>
+
+<div class="finding">
+  <div class="sev high">High</div>
+  <div>
+    <h3>The heat exchanger is cracked</h3>
+    <p>A crack lets exhaust mix with the air that heats the house. It can leak carbon monoxide, so the furnace should not run until it's fixed.</p>
+    <p class="fix"><b>Either way:</b> space heaters and the carbon monoxide alarm until the work is done.</p>
+  </div>
+</div>
+
+<div class="finding">
+  <div class="sev high">High</div>
+  <div>
+    <h3>The blower motor is failing</h3>
+    <p>It's running hot and drawing too much power. Replacing it alone costs about $700.</p>
+  </div>
+</div>
+
+<div class="finding">
+  <div class="sev med">Medium</div>
+  <div>
+    <h3>The ductwork leaks in the basement</h3>
+    <p>Two joints have come apart, so some heat never reaches the upstairs rooms. A small job either way.</p>
+  </div>
+</div>
+
+<div class="finding">
+  <div class="sev good">Fine</div>
+  <div>
+    <h3>The gas line and thermostat are in good shape</h3>
+    <p>Both can stay as they are, which keeps the installation simple.</p>
+  </div>
+</div>
+
+<h2><span class="n">PART 2</span>What a new furnace gets us</h2>
+<div class="points">
+  <div><h3>Safe air</h3><p>No more worry about a cracked exchanger, and a new carbon monoxide shutoff built in.</p></div>
+  <div><h3>Warmer upstairs</h3><p>A variable-speed blower moves heat more evenly, and the duct fix stops the leaks.</p></div>
+  <div><h3>A ten-year warranty</h3><p>Parts and labor are covered, so a surprise repair doesn't come out of savings.</p></div>
+  <div><h3>Lower bills</h3><p>96% efficient instead of about 78%, which pays back part of the cost every winter.</p></div>
+</div>
+<div class="callout"><b>Good news:</b> the gas company's rebate of $600 is still open through December 31.</div>
+
+<h2><span class="n">PART 3</span>Decisions</h2>
+
+<div class="choice">
+  <h3>1. Repair or replace</h3>
+  <div class="opts">
+    <div class="opt pick"><span class="t">Replace the furnace</span>About $6,400 installed, with the duct repair and the rebate paperwork included.</div>
+    <div class="opt"><span class="t">Repair what's broken</span>About $2,900 now, with more repairs likely as the rest of the unit ages.</div>
+  </div>
+</div>
+
+<div class="choice">
+  <h3>2. How to pay</h3>
+  <div class="opts">
+    <div class="opt pick"><span class="t">From savings</span>Paying up front gets a 5% cash discount from the installer.</div>
+    <div class="opt"><span class="t">Installer's payment plan</span>Twelve months at 0%, but no cash discount.</div>
+  </div>
+</div>
+
+<h2><span class="n">PART 4</span>Next steps</h2>
+<ol class="steps">
+  <li><b>Keep the furnace off.</b> Space heaters in the bedrooms, and test the carbon monoxide alarm tonight.</li>
+  <li><b>Get a second quote</b> by Wednesday so we can compare.</li>
+  <li><b>Sign by Friday, December 4</b> to keep the Tuesday install date.</li>
+</ol>
+
+<div class="table-wrap">
+<table style="margin-top:18px">
+  <tr><th>Cost</th><th class="num">Repair</th><th class="num">Replace</th></tr>
+  <tr><td>Parts and labor</td><td class="num">$2,900</td><td class="num">$6,400</td></tr>
+  <tr><td>Utility rebate</td><td class="num">—</td><td class="num">−$600</td></tr>
+  <tr><td>Likely repairs, next 2 years</td><td class="num">$1,200+</td><td class="num">$0</td></tr>
+  <tr class="total"><td>Total</td><td class="num">$4,100+</td><td class="num">$5,800</td></tr>
+</table>
+</div>
+
+<footer><span>Furnace replacement · household report</span><span>Questions? Ask Lisa.</span></footer>
+</body>
+</html>

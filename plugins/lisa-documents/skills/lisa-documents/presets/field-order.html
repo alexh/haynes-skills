@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="preset" content="field-order">
+<title>Operation Drumstick</title>
+<!--FONTS-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@700;800&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap">
+<!--/FONTS-->
+<style>
+/* FIELD ORDER preset. A typed military operation order: stencil title,
+   Courier Prime body, five numbered paragraphs, classification bars.
+   Steps are real checkboxes on screen and empty boxes on paper. */
+:root {
+  --paper: #e8eae2;
+  --ink: #1b1f19;
+  --dim: #5d6457;
+  --rule: #b9bdb0;
+  --accent: #4a5a26;   /* olive: phase titles, numbers, checkmarks */
+  --bar: #2f6b2f;      /* classification bars */
+  --alert: #9a2a1c;    /* DO NOT, warnings */
+  --stencil: "Big Shoulders Stencil Display", Impact, "Arial Narrow", sans-serif;
+  --type: "Courier Prime", "Courier New", Courier, monospace;
+}
+@media screen and (prefers-color-scheme: dark) {
+  :root {
+    --paper: #131611; --ink: #d8dccd; --dim: #8d9482; --rule: #343a2e;
+    --accent: #a3b86c; --bar: #2f6b2f; --alert: #e0745f; color-scheme: dark;
+  }
+}
+@page { size: Letter; margin: 0.5in 0.6in; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.55 var(--type); }
+.bar { background: var(--bar); color: #f2f5ee; text-align: center; font: 700 12px/1 var(--type); letter-spacing: .18em; padding: 7px 16px; }
+main { max-width: 46rem; margin: 0 auto; padding: 2.5rem 16px 3rem; display: grid; gap: 2.25rem; }
+header { display: grid; gap: .6rem; border-bottom: 2px solid var(--ink); padding-bottom: 1.25rem; }
+.meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .25rem 1rem; color: var(--dim); font-size: 13px; letter-spacing: .06em; }
+h1 { font: 800 clamp(2.6rem, 9vw, 4.4rem)/.9 var(--stencil); letter-spacing: .02em; margin: 0; text-transform: uppercase; text-wrap: balance; }
+.sub { margin: 0; color: var(--dim); }
+section { display: grid; gap: .9rem; }
+h2 { margin: 0; font: 700 14px/1 var(--type); letter-spacing: .16em; text-transform: uppercase; display: flex; gap: .9rem; align-items: baseline; break-after: avoid; }
+h2 span { color: var(--accent); }
+h2::after { content: ""; flex: 1; border-bottom: 1px dashed var(--rule); }
+p { margin: 0; max-width: 65ch; }
+.mission { font-size: 1.15rem; font-weight: 700; border-left: 3px solid var(--accent); padding-left: 1rem; }
+dl { margin: 0; display: grid; grid-template-columns: minmax(8.5rem, max-content) 1fr; gap: .35rem 1.25rem; font-size: 15px; }
+dt { color: var(--dim); text-transform: uppercase; font-size: 12px; letter-spacing: .1em; padding-top: .2rem; }
+dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.on { color: var(--alert); font-weight: 700; }
+.phase { display: grid; gap: .5rem; break-inside: avoid; }
+.phase h3 { margin: 0; font: 800 1.35rem/1 var(--stencil); letter-spacing: .05em; text-transform: uppercase; color: var(--accent); }
+.phase h3 small { font: 400 13px var(--type); color: var(--dim); letter-spacing: .04em; text-transform: none; margin-left: .5rem; }
+ol.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: .35rem; }
+.steps label { display: grid; grid-template-columns: 1.4rem 2.2rem 1fr; gap: .4rem; align-items: start; padding: .55rem .25rem; border-bottom: 1px solid var(--rule); cursor: pointer; }
+.steps input { margin: .3rem 0 0; width: 1rem; height: 1rem; accent-color: var(--accent); }
+.steps input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.steps .n { color: var(--dim); font-variant-numeric: tabular-nums; }
+.steps .t { min-width: 0; }
+.steps .t em { display: block; font-style: italic; color: var(--dim); font-size: 14px; margin-top: .15rem; }
+.steps input:checked ~ .t { text-decoration: line-through; text-decoration-color: var(--accent); color: var(--dim); }
+code { font: inherit; font-weight: 700; overflow-wrap: anywhere; }
+ul.roe { margin: 0; padding: 0; list-style: none; display: grid; gap: .5rem; }
+ul.roe li { display: grid; grid-template-columns: 4.5rem 1fr; gap: .75rem; }
+ul.roe b { color: var(--alert); letter-spacing: .08em; font-size: 13px; padding-top: .15rem; }
+footer { border-top: 2px solid var(--ink); padding-top: 1rem; color: var(--dim); font-size: 13px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem; }
+@media print {
+  /* Paper stops at the printer's margins, so print on white */
+  :root { --paper: #fff; }
+  body { font-size: 11.5pt; }
+  main { padding: 1.5rem 0 1rem; gap: 1.6rem; max-width: none; }
+  .steps label { padding: .4rem .25rem; }
+  .screen-only { display: none; }
+}
+@media (max-width: 480px) {
+  dl { grid-template-columns: 1fr; gap: 0; }
+  dd { margin-bottom: .55rem; }
+  .steps label { grid-template-columns: 1.4rem 1.8rem 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="bar">UNCLASSIFIED // FAMILY USE ONLY</div>
+<main>
+  <header>
+    <div class="meta"><span>OPORD 11-26</span><span>DTG 26 NOV 2026</span><span>COPY 1 OF 5</span></div>
+    <h1>Operation Drumstick</h1>
+    <p class="sub">Thanksgiving dinner for fourteen, on the table at 3 PM. Five people, one oven, one very large bird.</p>
+  </header>
+
+  <section>
+    <h2><span>1.</span>Situation</h2>
+    <p>Fourteen guests are confirmed, including two vegetarians and one nut allergy. The turkey has been thawing in the fridge since Sunday. The oven is the bottleneck: the turkey needs it until 1:30, and four sides need it after.</p>
+    <dl>
+      <dt>Location</dt><dd>Lisa's kitchen and dining room</dd>
+      <dt>Guests arrive</dt><dd>2:00 PM</dd>
+      <dt>Dinner served</dt><dd>3:00 PM</dd>
+      <dt>Turkey</dt><dd>18 lb, about 4½ hours at 325°F</dd>
+      <dt>Allergy</dt><dd class="on">No nuts in anything, including the green beans</dd>
+    </dl>
+  </section>
+
+  <section>
+    <h2><span>2.</span>Mission</h2>
+    <p class="mission">Serve a hot dinner for fourteen at 3:00 PM on 26 NOV, with the kitchen clean enough to start pie by 4:30.</p>
+  </section>
+
+  <section>
+    <h2><span>3.</span>Execution</h2>
+    <div class="phase">
+      <h3>Phase I <small>Bird · 8:30 AM</small></h3>
+      <ol class="steps">
+        <li><label><input type="checkbox" id="s1"><span class="n">1.1</span><span class="t">Preheat to 325°F. Pat the turkey dry, butter under the skin, salt everywhere.</span></label></li>
+        <li><label><input type="checkbox" id="s2"><span class="n">1.2</span><span class="t">Turkey in by 9:00 AM. Set a timer for 11:30 to baste.<em>The meat thermometer is in the drawer left of the stove.</em></span></label></li>
+      </ol>
+    </div>
+    <div class="phase">
+      <h3>Phase II <small>Sides · 11:00 AM</small></h3>
+      <ol class="steps">
+        <li><label><input type="checkbox" id="s3"><span class="n">2.1</span><span class="t">Peel and boil the potatoes. Mash and hold them in the slow cooker on Warm.</span></label></li>
+        <li><label><input type="checkbox" id="s4"><span class="n">2.2</span><span class="t">Assemble the stuffing, sweet potatoes and green beans in their baking dishes.</span></label></li>
+        <li><label><input type="checkbox" id="s5"><span class="n">2.3</span><span class="t">Turkey out at 165°F in the thigh, about 1:30 PM. Tent with foil and let it rest.</span></label></li>
+        <li><label><input type="checkbox" id="s6"><span class="n">2.4</span><span class="t">Oven up to 375°F. All four side dishes in by 1:45 PM.</span></label></li>
+      </ol>
+    </div>
+    <div class="phase">
+      <h3>Phase III <small>Table · 2:30 PM</small></h3>
+      <ol class="steps">
+        <li><label><input type="checkbox" id="s7"><span class="n">3.1</span><span class="t">Make the gravy from the drippings while the turkey is carved.</span></label></li>
+        <li><label><input type="checkbox" id="s8"><span class="n">3.2</span><span class="t">Rolls in for the last 10 minutes. Everything on the table at 3:00 PM.</span></label></li>
+      </ol>
+    </div>
+  </section>
+
+  <section>
+    <h2><span>4.</span>Rules of engagement</h2>
+    <ul class="roe">
+      <li><b>DO NOT</b><span>Open the oven to check the turkey more than once an hour.</span></li>
+      <li><b>DO NOT</b><span>Use the pecan topping on the sweet potatoes. Nut allergy at the table.</span></li>
+      <li><b>GUARD</b><span>Keep the dog out of the kitchen from 1:00 PM on.</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span>5.</span>Command &amp; signal</h2>
+    <dl>
+      <dt>In charge</dt><dd>Lisa</dd>
+      <dt>Carving</dt><dd>Marc</dd>
+      <dt>Abort</dt><dd>If the turkey isn't done by 2:00 PM, serve the sides first and carve at 3:30.</dd>
+    </dl>
+  </section>
+
+  <footer><span>Prepared by Lisa Haynes</span><span class="screen-only">Checkmarks save on this device only</span></footer>
+</main>
+<div class="bar">UNCLASSIFIED // FAMILY USE ONLY</div>
+<script>
+(function () {
+  var KEY = "field-order:" + document.title;
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) {}
+  document.querySelectorAll(".steps input").forEach(function (box) {
+    box.checked = !!state[box.id];
+    box.addEventListener("change", function () {
+      state[box.id] = box.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+    });
+  });
+})();
+</script>
+</body>
+</html>

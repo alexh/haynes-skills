@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="preset" content="proof-sheet">
+<title>First Edition Notice</title>
+<!--FONTS-->
+<!-- Monaspace Krypton is not on Google Fonts. Until finish.py embeds it,
+     previews fall back to the system monospace. -->
+<!--/FONTS-->
+<style>
+/* PROOF SHEET preset. One printer's proof on lined paper: Monaspace Krypton
+   throughout, a two-line title (heavy, then light in the accent), a rotated
+   stamp, registration marks at the corners. For notices, invitations,
+   cover sheets and save-the-dates. */
+:root {
+  --paper: #efe9dc;
+  --paper-2: #e6dfcf;
+  --ink: #1b1a17;
+  --ink-soft: #6d675b;
+  --rule: #c9bfa9;
+  --accent: #c0182f;   /* Lisa red: second title line */
+  --stamp: #8a1222;    /* the rotated stamp */
+  --field: #f7f3ea;
+  --mono: "Monaspace Krypton", ui-monospace, Menlo, Consolas, monospace;
+}
+@media screen and (prefers-color-scheme: dark) {
+  :root {
+    --paper: #15140f; --paper-2: #1c1b15; --ink: #ece5d5; --ink-soft: #9a927f;
+    --rule: #3a372c; --accent: #ff5a6e; --stamp: #ff7a6b; --field: #1f1e18; color-scheme: dark;
+  }
+}
+@page { size: Letter; }
+* { box-sizing: border-box; margin: 0; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body {
+  font-family: var(--mono); color: var(--ink); min-height: 100vh;
+  background:
+    radial-gradient(120% 80% at 50% 0%, transparent 40%, color-mix(in srgb, var(--paper-2) 70%, transparent) 100%),
+    repeating-linear-gradient(0deg, transparent 0 27px, color-mix(in srgb, var(--rule) 35%, transparent) 27px 28px),
+    var(--paper);
+  display: grid; place-items: center; padding: 40px 16px;
+  -webkit-font-smoothing: antialiased;
+}
+.sheet {
+  position: relative; width: min(560px, 100%); padding: 56px 44px 40px;
+  border: 1px solid var(--rule);
+  background: color-mix(in srgb, var(--paper) 88%, white 12%);
+  box-shadow: 0 1px 0 var(--rule), 0 30px 60px -30px rgba(40, 30, 10, .35);
+  animation: rise .7s cubic-bezier(.2, .8, .2, 1) both;
+}
+@media screen and (prefers-color-scheme: dark) { .sheet { background: var(--paper-2); box-shadow: 0 30px 60px -30px #000; } }
+
+/* Printer's registration marks at each corner */
+.reg { position: absolute; width: 22px; height: 22px; border: 1px solid var(--ink-soft); border-radius: 50%; }
+.reg::before, .reg::after { content: ""; position: absolute; background: var(--ink-soft); }
+.reg::before { left: 50%; top: -7px; bottom: -7px; width: 1px; }
+.reg::after { top: 50%; left: -7px; right: -7px; height: 1px; }
+.reg.tl { top: -11px; left: -11px; } .reg.tr { top: -11px; right: -11px; }
+.reg.bl { bottom: -11px; left: -11px; } .reg.br { bottom: -11px; right: -11px; }
+
+.slug { display: flex; justify-content: space-between; gap: 12px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); padding-bottom: 14px; border-bottom: 1px dashed var(--rule); animation: fade .6s .15s both; }
+h1 { margin-top: 34px; font-weight: 800; font-size: clamp(40px, 11vw, 64px); line-height: .92; letter-spacing: -.04em; text-align: center; animation: fade .7s .25s both; }
+h1 span { display: block; }
+h1 .light { font-weight: 300; letter-spacing: .02em; color: var(--accent); }
+.stamp {
+  /* Sits in the gap under the slug rule, clear of the slug text */
+  position: absolute; top: 100px; right: 26px;
+  font-size: 11px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--stamp); border: 2px solid var(--stamp); padding: 6px 9px 5px;
+  transform: rotate(-8deg); opacity: .85;
+  animation: stamp .45s .7s cubic-bezier(.3, 1.6, .5, 1) both;
+}
+.for { margin-top: 22px; font-size: 13px; line-height: 1.6; color: var(--ink-soft); animation: fade .7s .35s both; }
+.for b { color: var(--ink); font-weight: 400; }
+
+/* Details box: the facts people act on, label over value */
+.details { margin-top: 32px; border: 1px solid var(--ink); background: var(--field); animation: fade .7s .45s both; }
+.details > div { display: grid; grid-template-columns: 7.5rem 1fr; gap: 12px; padding: 12px 16px; border-top: 1px solid var(--rule); }
+.details > div:first-child { border-top: 0; }
+.details dt { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); padding-top: 3px; }
+.details dd { font-size: 15px; letter-spacing: .02em; min-width: 0; overflow-wrap: anywhere; }
+::selection { background: var(--accent); color: #fff; }
+
+.foot { margin-top: 28px; padding-top: 14px; border-top: 1px dashed var(--rule); font-size: 12px; color: var(--ink-soft); letter-spacing: .04em; animation: fade .7s .55s both; }
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } }
+@keyframes fade { from { opacity: 0; transform: translateY(6px); } }
+@keyframes stamp { from { opacity: 0; transform: rotate(-8deg) scale(1.8); } }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+/* One page, printed edge to edge on the lined paper */
+@page { margin: 0; }
+@media print {
+  * { animation: none !important; }
+  body { min-height: 100vh; padding: .75in; }
+  .sheet { box-shadow: none; }
+}
+@media (max-width: 480px) {
+  .sheet { padding: 44px 22px 28px; }
+  .stamp { top: 80px; right: 14px; }
+  .details > div { grid-template-columns: 1fr; gap: 2px; }
+}
+</style>
+</head>
+<body>
+<main class="sheet">
+  <i class="reg tl"></i><i class="reg tr"></i><i class="reg bl"></i><i class="reg br"></i>
+  <div class="slug"><span>Notice 01</span><span>Book launch</span></div>
+  <div class="stamp">Save the date</div>
+  <h1><span>First</span><span class="light">Edition</span></h1>
+  <p class="for">Come celebrate the release of <b>Lisa Haynes's new book</b> with a short reading, a signing table and far too many cookies.</p>
+  <dl class="details">
+    <div><dt>When</dt><dd>Saturday, March 13, 2027 · 2 PM</dd></div>
+    <div><dt>Where</dt><dd>The Corner Bookshop, back room</dd></div>
+    <div><dt>Cost</dt><dd>Free. Books $18 at the door</dd></div>
+    <div><dt>RSVP</dt><dd>By March 1, so we bake enough</dd></div>
+  </dl>
+  <p class="foot">Bring a friend. Bring two.</p>
+</main>
+</body>
+</html>

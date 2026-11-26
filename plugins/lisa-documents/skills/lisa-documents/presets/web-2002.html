@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="preset" content="web-2002">
+<title>Lisa's Corner of the Web</title>
+<!--FONTS-->
+<!-- Verdana, Georgia, Tahoma and Courier New ship with every Mac and PC,
+     exactly as they did in 2002. Nothing to embed. -->
+<!--/FONTS-->
+<style>
+/* WEB 2002 preset. A personal homepage from the year 2002: a tiled
+   background, a 760-pixel page, a sidebar of boxes with title bars,
+   Verdana everywhere, blue links, a hit counter and 88x31 buttons.
+   One look only, as it was then: no dark mode. */
+:root {
+  --page: #ffffff;
+  --ink: #222222;
+  --soft: #666666;
+  --line: #999999;
+  --accent: #c0182f;       /* Lisa red: header, post titles */
+  --accent-dark: #7d0f20;
+  --box: #e9e6e0;          /* sidebar box fill */
+  --bar-top: #f4f2ee;      /* box title bar gradient */
+  --bar-bottom: #cfcac1;
+  --link: #0000ee;
+  --visited: #551a8b;
+  --verdana: Verdana, "DejaVu Sans", Geneva, Tahoma, sans-serif;
+  --georgia: Georgia, "Times New Roman", Times, serif;
+  --courier: "Courier New", Courier, monospace;
+  color-scheme: light;
+}
+@page { size: Letter; margin: 0.5in; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body {
+  margin: 0; padding: 24px 16px 40px; color: var(--ink); font: 13px/1.5 var(--verdana);
+  /* the tiled background every homepage had */
+  background-color: #dcd7cf;
+  background-image:
+    linear-gradient(45deg, #d3cdc3 25%, transparent 25%, transparent 75%, #d3cdc3 75%),
+    linear-gradient(45deg, #d3cdc3 25%, transparent 25%, transparent 75%, #d3cdc3 75%);
+  background-size: 16px 16px; background-position: 0 0, 8px 8px;
+}
+::selection { background: #000080; color: #fff; }
+a { color: var(--link); }
+a:visited { color: var(--visited); }
+a:hover { color: var(--accent); }
+a:focus-visible { outline: 1px dotted #000; outline-offset: 1px; }
+p { margin: 0 0 1em; }
+
+.page { max-width: 760px; margin: 0 auto; background: var(--page); border: 1px solid #777; box-shadow: 3px 3px 0 rgba(0, 0, 0, .18); }
+
+/* Header bar */
+.masthead { background: linear-gradient(#d4243c, var(--accent) 55%, var(--accent-dark)); color: #fff; padding: 18px 20px 14px; border-bottom: 3px double #fff; }
+.masthead h1 { margin: 0; font: bold 30px/1.1 var(--georgia); text-shadow: 2px 2px 0 rgba(0, 0, 0, .45); letter-spacing: -.01em; }
+.masthead p { margin: 4px 0 0; font-size: 12px; letter-spacing: .04em; color: #fff; }
+
+/* Scrolling ticker, the polite cousin of <marquee> */
+.ticker { overflow: hidden; white-space: nowrap; background: #ffffcc; border-bottom: 1px solid var(--line); font: bold 11px/1 var(--verdana); color: #800000; padding: 5px 0; }
+.ticker span { display: inline-block; padding-left: 100%; animation: tick 22s linear infinite; }
+@keyframes tick { to { transform: translateX(-100%); } }
+
+.cols { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 16px; padding: 16px; }
+
+/* Sidebar boxes with title bars */
+.box { border: 1px solid var(--line); background: var(--box); margin-bottom: 14px; font-size: 12px; }
+.box h2 { margin: 0; padding: 3px 6px; font: bold 12px/1.4 var(--verdana); color: #000; background: linear-gradient(var(--bar-top), var(--bar-bottom)); border-bottom: 1px solid var(--line); }
+.box .in { padding: 8px; }
+.box ul { list-style: none; margin: 0; padding: 0; }
+.box li { padding: 2px 0; }
+.box li::before { content: "» "; color: var(--accent); }
+
+.counter { display: inline-flex; gap: 2px; margin-top: 4px; }
+.counter b { width: 13px; text-align: center; background: #000; color: #39ff14; font: bold 14px/20px var(--courier); border: 1px inset #555; }
+
+/* 88x31 buttons, made of boxes */
+.buttons { display: grid; gap: 6px; justify-items: start; }
+.b88 { width: 88px; height: 31px; display: grid; grid-template-columns: 30px 1fr; border: 1px solid #000; font: bold 9px/1.05 var(--verdana); text-transform: uppercase; overflow: hidden; }
+.b88 > span { display: grid; place-items: center; text-align: center; padding: 0 2px; }
+.b88 .l { background: #000; color: #fff; font-size: 11px; }
+.b88.red .r { background: var(--accent); color: #fff; }
+.b88.blue .r { background: #000080; color: #fff; }
+.b88.gray .r { background: #c0c0c0; color: #000; }
+
+/* Blog posts */
+.date { margin: 0 0 6px; font: bold 11px/1.4 var(--verdana); color: var(--soft); text-transform: uppercase; letter-spacing: .08em; border-bottom: 1px dotted var(--line); padding-bottom: 3px; }
+.post { margin-bottom: 26px; }
+.post h2 { margin: 0 0 8px; font: bold 18px/1.25 var(--georgia); color: var(--accent); }
+.post .by { font-size: 12px; color: var(--soft); border-top: 1px dotted var(--line); padding-top: 4px; margin-top: 10px; }
+.new { display: inline-block; font: bold 9px/1 var(--verdana); color: #fff; background: #d00000; padding: 2px 3px; margin-left: 4px; vertical-align: 3px; animation: blink 1.2s steps(2, start) infinite; }
+@keyframes blink { to { visibility: hidden; } }
+.post ul { margin: 0 0 1em; padding-left: 22px; }
+.post table { border-collapse: collapse; margin: 0 0 1em; font-size: 12px; }
+.post td, .post th { border: 1px solid var(--line); padding: 3px 8px; text-align: left; }
+.post th { background: var(--box); }
+hr { border: 0; border-top: 2px groove #ccc; margin: 18px 0; }
+
+.foot { text-align: center; font-size: 11px; color: var(--soft); padding: 10px 16px 14px; border-top: 1px solid var(--line); background: #f6f5f2; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker span { animation: none; padding-left: 8px; }
+  .new { animation: none; }
+}
+@media (max-width: 620px) {
+  .cols { grid-template-columns: 1fr; }
+  .sidebar { order: 2; }
+  .masthead h1 { font-size: 24px; }
+}
+@media print {
+  body { background: #fff; padding: 0; }
+  .page { box-shadow: none; }
+  .ticker span { animation: none; padding-left: 8px; }
+  .new { animation: none; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="masthead">
+    <h1>Lisa's Corner of the Web</h1>
+    <p>recipes · books · garden · family · est. 2002</p>
+  </header>
+  <div class="ticker" aria-hidden="true"><span>*** Welcome!!! *** New recipe posted November 26 *** Book club meets December 10 *** Please sign my guestbook ***</span></div>
+
+  <div class="cols">
+    <aside class="sidebar">
+      <div class="box"><h2>Navigation</h2><div class="in"><ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About Me</a></li>
+        <li><a href="#">Recipes</a></li>
+        <li><a href="#">Book Club</a></li>
+        <li><a href="#">Photo Album</a></li>
+        <li><a href="#">Guestbook</a></li>
+      </ul></div></div>
+      <div class="box"><h2>Visitors</h2><div class="in">You are visitor number<br>
+        <span class="counter" aria-label="004217"><b>0</b><b>0</b><b>4</b><b>2</b><b>1</b><b>7</b></span></div></div>
+      <div class="box"><h2>Buttons</h2><div class="in buttons" aria-hidden="true">
+        <span class="b88 red"><span class="l">♥</span><span class="r">Made by Lisa</span></span>
+        <span class="b88 blue"><span class="l">800</span><span class="r">Best at 800×600</span></span>
+        <span class="b88 gray"><span class="l">ABC</span><span class="r">Spell checked</span></span>
+      </div></div>
+    </aside>
+
+    <main>
+      <div class="date">Thursday, November 26, 2026</div>
+      <article class="post">
+        <h2>The sourdough starter lives!<span class="new">NEW!</span></h2>
+        <p>After three failed tries, the starter on top of the fridge finally doubled overnight. The secret was moving it away from the window. I've named it Gerald.</p>
+        <p>What finally worked:</p>
+        <ul>
+          <li>Equal parts flour and water by weight, fed every morning</li>
+          <li>Unbleached flour only</li>
+          <li>Somewhere warm, about 75°F</li>
+        </ul>
+        <p>First loaf is going in Saturday. Pictures to follow in the <a href="#">photo album</a>.</p>
+        <div class="by">posted by Lisa at 3:14 PM | <a href="#">2 comments</a></div>
+      </article>
+
+      <hr>
+
+      <div class="date">Sunday, November 15, 2026</div>
+      <article class="post">
+        <h2>Book club picks for winter</h2>
+        <p>We voted after dessert. Here's the schedule, so nobody can say they didn't know:</p>
+        <table>
+          <tr><th>Month</th><th>Book</th><th>Host</th></tr>
+          <tr><td>December</td><td>Gilead</td><td>Carol</td></tr>
+          <tr><td>January</td><td>The Remains of the Day</td><td>Lisa</td></tr>
+          <tr><td>February</td><td>Crossing to Safety</td><td>Jean</td></tr>
+        </table>
+        <div class="by">posted by Lisa at 9:02 PM | <a href="#">5 comments</a></div>
+      </article>
+    </main>
+  </div>
+
+  <div class="foot">© 2002–2026 Lisa · Last updated 11/26/2026 · <a href="#">Sign my guestbook!</a></div>
+</div>
+</body>
+</html>

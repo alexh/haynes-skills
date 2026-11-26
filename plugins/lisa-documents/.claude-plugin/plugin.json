@@ -1,0 +1,9 @@
+{
+  "name": "lisa-documents",
+  "description": "Six house styles for documents: report, field order, proof sheet, gallery, 2002 web and Word doc. Each is a finished template with its own fonts, print layout and phone layout.",
+  "author": { "name": "Alex Haynes" },
+  "homepage": "https://github.com/alexh/mom-skills",
+  "repository": "https://github.com/alexh/mom-skills",
+  "license": "MIT",
+  "keywords": ["documents", "typography", "templates", "print", "pdf"]
+}

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="preset" content="word-doc">
+<title>Winter Reading Notes</title>
+<!--FONTS-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&display=swap">
+<!--/FONTS-->
+<style>
+/* WORD DOC preset. A plain, tidy Word document: Calibri (Carlito has the
+   same letter widths), 11 pt text, Word's built-in Title and Heading
+   styles in Word's "Dark Red", a Grid Table, an Intense Quote, 1-inch
+   margins. On screen it sits on Word's gray canvas like a real page. */
+:root {
+  --canvas: #e8e7e5;
+  --page: #ffffff;
+  --ink: #000000;
+  --soft: #595959;
+  --red: #c00000;          /* Word's standard "Dark Red" */
+  --red-dark: #800000;
+  --red-line: #f0a8a8;
+  --red-band: #fbe4e4;
+  --link: #0563c1;
+  --calibri: Calibri, Carlito, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+@page {
+  size: Letter; margin: 1in;
+  @bottom-center { content: counter(page); font: 9pt Calibri, Carlito, sans-serif; color: #595959; }
+}
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { margin: 0; background: var(--canvas); color: var(--ink); font: 11pt/1.15 var(--calibri); }
+::selection { background: #c8dcf2; }
+.doc { width: min(8.5in, 100%); margin: 32px auto; padding: 1in; background: var(--page); box-shadow: 0 1px 3px rgba(0, 0, 0, .18), 0 8px 24px -8px rgba(0, 0, 0, .18); }
+p { margin: 0 0 8pt; }
+a { color: var(--link); text-underline-offset: .12em; }
+a:focus-visible { outline: 1px dotted var(--ink); }
+
+/* Word's built-in styles */
+.title { font-size: 28pt; line-height: 1; letter-spacing: -.5pt; margin: 0 0 4pt; font-weight: 400; }
+.subtitle { font-size: 11pt; color: var(--soft); letter-spacing: .75pt; margin: 0 0 12pt; }
+h1 { font-size: 16pt; line-height: 1.1; font-weight: 400; color: var(--red); margin: 18pt 0 6pt; break-after: avoid; }
+h2 { font-size: 13pt; line-height: 1.1; font-weight: 400; color: var(--red); margin: 12pt 0 4pt; break-after: avoid; }
+h3 { font-size: 12pt; line-height: 1.1; font-weight: 400; color: var(--red-dark); margin: 10pt 0 4pt; break-after: avoid; }
+ul, ol { margin: 0 0 8pt; padding-left: .5in; }
+li { margin: 0 0 2pt; padding-left: .08in; }
+li::marker { color: var(--ink); }
+
+/* Grid Table 4, accent 2 */
+.table-wrap { overflow-x: auto; margin: 4pt 0 12pt; }
+table { border-collapse: collapse; width: 100%; font-size: 11pt; font-variant-numeric: tabular-nums; break-inside: avoid; }
+th { background: var(--red); color: #fff; font-weight: 700; text-align: left; padding: 3pt 6pt; border: 1px solid var(--red); }
+td { padding: 3pt 6pt; border: 1px solid var(--red-line); }
+td:first-child { font-weight: 700; }
+tr:nth-child(odd) td { background: var(--red-band); }
+
+/* Intense Quote */
+.quote { margin: 14pt .86in; padding: 10pt 0; border-top: 1px solid var(--red); border-bottom: 1px solid var(--red); text-align: center; font-style: italic; color: var(--red); }
+.quote p { margin: 0; }
+
+@media (max-width: 700px) {
+  .doc { margin: 0; padding: 28px 20px 36px; box-shadow: none; }
+  .quote { margin: 14pt 0; }
+}
+@media print {
+  body { background: #fff; }
+  .doc { width: auto; margin: 0; padding: 0; box-shadow: none; }
+}
+</style>
+</head>
+<body>
+<article class="doc">
+  <p class="title">Winter Reading Notes</p>
+  <p class="subtitle">Book club · December 2026 to February 2027</p>
+
+  <p>Here's everything from our planning night in one place: the three books we picked, who's hosting, and the questions Carol suggested for December. Bring your copy and a dish to share.</p>
+
+  <h1>This season's books</h1>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Month</th><th>Book</th><th>Author</th><th>Host</th></tr>
+    <tr><td>December 10</td><td>Gilead</td><td>Marilynne Robinson</td><td>Carol</td></tr>
+    <tr><td>January 14</td><td>The Remains of the Day</td><td>Kazuo Ishiguro</td><td>Lisa</td></tr>
+    <tr><td>February 11</td><td>Crossing to Safety</td><td>Wallace Stegner</td><td>Jean</td></tr>
+  </table>
+  </div>
+
+  <h1>Questions for December</h1>
+  <ol>
+    <li>The whole book is a letter to a young son. How does that change the way the story is told?</li>
+    <li>Which character did you understand better by the end?</li>
+    <li>What would you write in a letter like this, and who would you write it to?</li>
+  </ol>
+
+  <div class="quote"><p>“The best books leave you wanting to call someone and talk about them.”</p></div>
+
+  <h1>Before next time</h1>
+  <h2>Bringing food</h2>
+  <ul>
+    <li>Carol has the main dish covered.</li>
+    <li>Everyone else, bring a side or a dessert. Reply to the group text so we don't end up with six pies.</li>
+  </ul>
+  <h2>If you can't make it</h2>
+  <p>Send your thoughts on the questions to Lisa beforehand and she'll read them out.</p>
+</article>
+</body>
+</html>

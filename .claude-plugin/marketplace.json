@@ -1,0 +1,12 @@
+{
+  "name": "mom-skills",
+  "owner": { "name": "Alex Haynes" },
+  "description": "Skills Alex made for Lisa.",
+  "plugins": [
+    {
+      "name": "lisa-documents",
+      "source": "./plugins/lisa-documents",
+      "description": "Six house styles for documents: report, field order, proof sheet, gallery, 2002 web and Word doc."
+    }
+  ]
+}

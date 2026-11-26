@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="preset" content="gallery">
+<title>Kitchen Table</title>
+<!--FONTS-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Hanken+Grotesk:wght@400;500;600&display=swap">
+<!--/FONTS-->
+<style>
+/* GALLERY preset. Exhibition wall text on a white wall: a large Bodoni
+   title, small grotesk labels, museum "tombstone" captions for each piece,
+   and the gallery's red dot as the only color. Lots of empty wall. */
+:root {
+  --wall: #ffffff;
+  --ink: #141414;
+  --soft: #6b6863;
+  --hair: #e2dfda;
+  --dot: #c0182f;      /* Lisa red: the gallery's red dot */
+  --serif: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  --sans: "Hanken Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+@media screen and (prefers-color-scheme: dark) {
+  :root { --wall: #121211; --ink: #ecebe8; --soft: #9d9a94; --hair: #2e2d2a; --dot: #ff4d5e; color-scheme: dark; }
+}
+@page { size: Letter; margin: 0.8in 0.9in; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { margin: 0; background: var(--wall); color: var(--ink); font: 400 16px/1.6 var(--sans); -webkit-font-smoothing: antialiased; }
+::selection { background: var(--ink); color: var(--wall); }
+a { color: inherit; text-underline-offset: .2em; text-decoration-thickness: 1px; }
+a:focus-visible { outline: 1px solid var(--ink); outline-offset: 3px; }
+p { margin: 0; }
+
+/* Two columns: a narrow label rail on the left, the wall text on the right */
+.wall { max-width: 62rem; margin: 0 auto; padding: 7rem 16px 6rem; display: grid; grid-template-columns: 13rem minmax(0, 1fr); column-gap: 4rem; row-gap: 5rem; }
+.rail { font-size: 12px; line-height: 1.55; color: var(--soft); letter-spacing: .01em; }
+.rail strong { display: block; color: var(--ink); font-weight: 500; }
+.rail + * { min-width: 0; }
+
+h1 { font: 400 clamp(3.2rem, 8.5vw, 5.75rem)/.95 var(--serif); font-optical-sizing: auto; letter-spacing: -.02em; margin: 0; text-wrap: balance; }
+/* Subtitle: same voice, a step down, so the name stays the headline */
+h1 em { display: block; margin-top: .3em; font-size: .46em; line-height: 1.1; font-style: italic; letter-spacing: -.01em; }
+.dates { margin-top: 1.6rem; font-size: 14px; color: var(--soft); }
+
+.text { max-width: 34em; display: grid; gap: 1.1em; font-size: 17px; }
+.text p:first-child::first-line { font-weight: 500; }
+
+blockquote { margin: 0; max-width: 22em; font: italic 400 clamp(1.6rem, 3.4vw, 2.15rem)/1.2 var(--serif); letter-spacing: -.01em; text-indent: -.42em; text-wrap: balance; }
+blockquote cite { display: block; margin-top: 1rem; text-indent: 0; font: 400 13px/1.5 var(--sans); font-style: normal; letter-spacing: 0; color: var(--soft); }
+
+h2 { font: 500 12px/1.4 var(--sans); letter-spacing: .02em; color: var(--soft); margin: 0 0 1.75rem; }
+
+/* Tombstone captions, the way a museum labels a work */
+.works { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.75rem 3rem; }
+.work { display: grid; grid-template-columns: 2rem minmax(0, 1fr); break-inside: avoid; }
+.work .no { font-size: 12px; color: var(--soft); font-variant-numeric: tabular-nums; padding-top: .45rem; }
+.work .title { font: italic 400 1.35rem/1.2 var(--serif); }
+.work .maker { font-weight: 500; font-size: 14px; margin-top: .35rem; }
+.work .meta { font-size: 13px; color: var(--soft); line-height: 1.5; margin-top: .2rem; }
+.work .note { font-size: 14px; margin-top: .6rem; max-width: 30em; }
+/* The red dot: a sold work in a gallery, a favorite here */
+.dot { display: inline-block; width: .55rem; height: .55rem; border-radius: 50%; background: var(--dot); vertical-align: .12em; margin-left: .4rem; }
+.key { margin-top: 2.5rem; font-size: 12px; color: var(--soft); }
+.key .dot { margin: 0 .35rem 0 0; }
+
+footer { grid-column: 1 / -1; border-top: 1px solid var(--hair); padding-top: 1.25rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 2rem; font-size: 12px; color: var(--soft); }
+
+@media (max-width: 760px) {
+  .wall { grid-template-columns: 1fr; padding-top: 3.5rem; row-gap: 1.25rem; }
+  .rail { margin-top: 2.5rem; }
+  .rail:first-child { margin-top: 0; }
+  .works { grid-template-columns: 1fr; }
+}
+@media print {
+  body { font-size: 11pt; }
+  .wall { padding: 0; max-width: none; row-gap: 3.2rem; grid-template-columns: 11rem minmax(0, 1fr); column-gap: 2.5rem; }
+  .text { font-size: 11.5pt; }
+  /* Start the list of works on a fresh page with its label */
+  .new-page { break-before: page; }
+}
+</style>
+</head>
+<body>
+<main class="wall">
+  <div class="rail"><strong>Kitchen Table</strong>An exhibition in the dining room<br>Haynes family collection</div>
+  <header>
+    <h1>Kitchen Table<em>Forty years of recipe cards</em></h1>
+    <p class="dates">November 26, 2026 – January 3, 2027 · Open whenever someone's cooking</p>
+  </header>
+
+  <div class="rail"><strong>About the exhibition</strong>Wall text</div>
+  <div class="text">
+    <p>Every family keeps two cookbooks: the one on the shelf and the one in the drawer. This exhibition is the second kind.</p>
+    <p>The cards gathered here were written in pencil, ink and typewriter between 1974 and 2011. Most have been rewritten at least once. Several carry a stranger's handwriting, copied from a neighbor or a potluck. All of them are stained, and the stains are the best record of which recipes were actually made.</p>
+    <p>They are shown as they were found, grease spots and all, in the order they entered the drawer.</p>
+  </div>
+
+  <div class="rail"><strong>From the drawer</strong>Note on the back of no. 1</div>
+  <blockquote>“Don't skimp on the butter, and don't tell your father how much.”<cite>Ruth Haynes, about 1974</cite></blockquote>
+
+  <div class="rail new-page"><strong>List of works</strong>Six cards, in the order they entered the drawer</div>
+  <section>
+    <h2>Measurements are as written by hand.</h2>
+    <ol class="works">
+      <li class="work"><span class="no">1</span><div><div class="title">Apple Pie<span class="dot" title="Family favorite"></span></div><div class="maker">Ruth Haynes</div><div class="meta">About 1974<br>Ink and butter on index card, 3 × 5 in.</div><p class="note">The crust instructions run off the card and onto the back.</p></div></li>
+      <li class="work"><span class="no">2</span><div><div class="title">Sunday Pot Roast</div><div class="maker">Unknown, copied by Ruth</div><div class="meta">1981<br>Pencil on notebook paper, folded twice</div></div></li>
+      <li class="work"><span class="no">3</span><div><div class="title">Sugar Cookies<span class="dot" title="Family favorite"></span></div><div class="maker">Lisa Haynes</div><div class="meta">1988<br>Typewriter on recipe card, with flour</div><p class="note">Made every December since. The card has never been clean.</p></div></li>
+      <li class="work"><span class="no">4</span><div><div class="title">Chicken and Noodles</div><div class="maker">Marc Haynes</div><div class="meta">1993<br>Ballpoint on the back of an envelope</div></div></li>
+      <li class="work"><span class="no">5</span><div><div class="title">Aunt Carol's Lemon Bars (do not change)</div><div class="maker">Carol Whitaker</div><div class="meta">2004<br>Felt-tip on index card, 4 × 6 in.</div></div></li>
+      <li class="work"><span class="no">6</span><div><div class="title">Zucchini Bread</div><div class="maker">From a neighbor's email</div><div class="meta">2011<br>Inkjet print with handwritten corrections</div></div></li>
+    </ol>
+    <p class="key"><span class="dot"></span>Red dot: a family favorite.</p>
+  </section>
+
+  <footer><span>Kitchen Table · organized by Lisa Haynes</span><span>Please touch the cards. Wash your hands first.</span></footer>
+</main>
+</body>
+</html>
