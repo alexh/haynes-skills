@@ -21,7 +21,7 @@ Claude picks the skill up on its own when she asks for a document, or she can ty
 
 ## Install
 
-Lisa's illustrated version, made with the skill itself: [Operation Red Ink](docs/Operation%20Red%20Ink%20-%20setup%20guide.pdf).
+Printable setup guide for Lisa, made with the skill itself: [Operation Red Ink](docs/Operation%20Red%20Ink%20-%20setup%20guide.pdf).
 
 ### Claude app (claude.ai or desktop)
 
