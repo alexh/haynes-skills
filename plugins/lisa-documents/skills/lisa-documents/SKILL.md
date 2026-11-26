@@ -29,14 +29,14 @@ If Lisa names a style, use it. Otherwise pick the best fit, make the document, a
 1. **Read the whole preset file** before writing. Its sample content shows every component in use.
 2. **Copy it** to a new file named for the document, for example `thanksgiving-plan.html`, in the folder where you save files for Lisa.
 3. **Replace the sample content** with hers:
-   - Keep `<meta name="preset" ...>`, the `<!--FONTS-->...<!--/FONTS-->` block and the entire `<style>` block exactly as they are.
+   - Keep `<meta name="preset" ...>`, the `<!--FONTS-->...<!--/FONTS-->` block, the entire `<style>` block and any `<script>` at the end exactly as they are.
    - Build only from the preset's own classes and elements. Delete components she doesn't need; repeat the ones she does. Don't add new CSS, fonts, colors, sizes, icons or emoji.
    - Update `<title>` to the document's name.
 4. **Finish it:**
    ```bash
    python3 ${CLAUDE_SKILL_DIR}/scripts/finish.py thanksgiving-plan.html --pdf
    ```
-   This writes `thanksgiving-plan.final.html` with every font built in (it works offline, in email, and prints exactly), plus `thanksgiving-plan.final.pdf` when Chrome or Playwright is available. Hand Lisa the `.final` files.
+   Use whichever Python the computer has (`python3`, `python`, or `uv run --no-project python`); the script needs nothing beyond the standard library. This writes `thanksgiving-plan.final.html` with every font built in (it works offline, in email, and prints exactly), plus `thanksgiving-plan.final.pdf` when Chrome or Playwright is available. Hand Lisa the `.final` files.
 5. **Look at the result** if you can (open the PDF or take a screenshot) and fix what you see: text running off the page, a heading stranded at the bottom of a page, a stamp sitting on top of text.
 
 If the script can't run, the working `.html` still looks right in a browser with an internet connection, except the proof sheet and the report's labels, which fall back to a plain monospace until finished.
@@ -65,14 +65,14 @@ If the script can't run, the working `.html` still looks right in a browser with
 
 ### Field order
 - `.bar` top and bottom: a classification line ("UNCLASSIFIED // FAMILY USE ONLY", or for example "FOR THE COOKS ONLY").
-- `.meta`: `OPORD MM-YY`, `DTG <date>`, `COPY 1 OF <number of people>`.
+- `.meta`: `OPORD MM-YY` and `DTG <date>` both use the day the order is written (today). The event's own date goes in the Situation and Mission. `COPY 1 OF <number of people getting it>`; if that isn't known, just `COPY 1`.
 - `h1`: "Operation" plus a two-word codename. Make up a playful one if she doesn't give one.
 - Always these five paragraphs, in this order:
   1. Situation: a short paragraph plus a `dl` of facts. Use `dd.on` for the one thing that must not go wrong.
   2. Mission: one bold sentence saying what, by when.
-  3. Execution: `.phase` blocks (`h3` "Phase I" with `<small>` "Name · time"). Each step is one action. Number steps as phase.step (1.1, 1.2, 2.1). Give each checkbox a unique id (s1, s2, ...). Put a hint in `<em>` inside `.t`.
-  4. Rules of engagement: `DO NOT`, `GUARD` (and `MUST` if useful), one line each.
-  5. Command & signal: who's in charge, how to reach them, what to do if plans fall apart.
+  3. Execution: as many `.phase` blocks as the job has, usually 2 to 5 (`h3` "Phase I" with `<small>` "Name · time", or just "Name" when there's no time). Each step is one action. Number steps as phase.step (1.1, 1.2, 2.1). Give each checkbox a unique id (s1, s2, ...). Put a hint in `<em>` inside `.t`.
+  4. Rules of engagement: `DO NOT`, `GUARD` (and `MUST` if useful), one line each. Sensible safety rules may be suggested.
+  5. Command & signal: Lisa is in charge unless she says otherwise. Only name other people for jobs she mentioned. A sensible fallback plan ("Abort") may be suggested, since it's advice rather than a fact.
 - Checkboxes remember their state on the device that ticks them. On paper they print as empty boxes.
 
 ### Proof sheet
