@@ -1,5 +1,5 @@
 ---
-name: lisa-documents
+name: document
 description: Lisa's six house styles for good-looking documents, each a finished template with its own fonts. Use whenever Lisa asks for a document, checklist, plan, report, write-up, letter, notice, invitation, save-the-date, sign, handout, newsletter, notes, minutes or anything to print or send, or names a style ("the military one", "the red report", "the stamp one", "the art gallery one", "the old internet one", "the Word one"). Presets - report, field-order, proof-sheet, gallery, web-2002, word-doc.
 license: MIT for the templates and script. Fonts are SIL Open Font License 1.1, see fonts/LICENSES.txt.
 allowed-tools: Bash(python3 ${CLAUDE_SKILL_DIR}/scripts/finish.py *)

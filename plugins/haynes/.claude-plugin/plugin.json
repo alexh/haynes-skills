@@ -1,0 +1,17 @@
+{
+  "name": "haynes",
+  "description": "The Haynes family's skills for Claude. /haynes:document makes documents in six house styles, each a finished template with its own fonts, print layout and phone layout.",
+  "author": {
+    "name": "Alex Haynes"
+  },
+  "homepage": "https://github.com/alexh/haynes-skills",
+  "repository": "https://github.com/alexh/haynes-skills",
+  "license": "MIT",
+  "keywords": [
+    "documents",
+    "typography",
+    "templates",
+    "print",
+    "pdf"
+  ]
+}
